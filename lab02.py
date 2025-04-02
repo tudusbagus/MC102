@@ -14,4 +14,4 @@ if (B2<=A):
 elif (B1<=A):
     print("False")
 else:
-    print(True)    
+    print("True")    
