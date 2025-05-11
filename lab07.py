@@ -9,32 +9,55 @@
 
 n = input()
 corredor = list(n)
-print(corredor)
-if "1" or "2" or "3" in corredor:
-    print(corredor.index("1"))
 
 # Leitura dos valores dos dados e simulação do jogo
+posicoes_monstro1 = [i for i, casa in enumerate(corredor) if casa == "1"]
+posicoes_monstro2 = [i for i, casa in enumerate(corredor) if casa == "2"]
+posicoes_monstro3 = [i for i, casa in enumerate(corredor) if casa == "3"]
 
-posiçoes_monstro1 = [i for i, casa in enumerate(corredor) if casa == "1"]
-posiçoes_monstro2 = [i for i, casa in enumerate(corredor) if casa == "2"]
-posições_monstro3 = [i for i, casa in enumerate(corredor) if casa == "3"]
+posicao = 0
+vidas = 3
 
-posição_inicial = corredor(0)
-posição = corredor(0)
-vidas_iniciais = 3
+while posicao < len(corredor):
+    dado_de_posicao = int(input())
+    posicao += dado_de_posicao
 
-andar = int(input())
-atacar = int(input())
+    if posicao >= len(corredor):
+        break
 
-while posição <= len(corredor):
-    dado_de_posição = int(input()) #lançamento do dado de posição
-    posição =+ dado_de_posição
-    if (posição == (posiçoes_monstro1)):
+    if posicao in posicoes_monstro1:
         dado_de_ataque = int(input())
         if dado_de_ataque >= 3:
+            corredor[posicao] = "."
+            posicoes_monstro1.remove(posicao)
+            continue
+        else:
+            vidas -= 1
+            posicao = 0
+    elif posicao in posicoes_monstro2:
+        dado_de_ataque = int(input())
+        if dado_de_ataque >= 5:
+            corredor[posicao] = "."
+            posicoes_monstro2.remove(posicao)
+            continue
+        else:
+            vidas -= 1
+            posicao = 0
+    elif posicao in posicoes_monstro3:
+        dado_de_ataque = int(input())
+        if dado_de_ataque == 6:
+            corredor[posicao] = "."
+            posicoes_monstro3.remove(posicao)
+            continue
+        else:
+            vidas -= 1
+            posicao = 0
 
-        
-
-
+    if vidas <= 0:
+        break
 
 # Impressão da saída
+if vidas <= 0:
+    print("O jogador perdeu.")
+else:
+    print("O jogador chegou ao fim!")
